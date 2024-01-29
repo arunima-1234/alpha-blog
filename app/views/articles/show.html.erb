@@ -1,0 +1,10 @@
+Showing articles details
+
+<p><strong> <%= @article.article_title %> </strong></p>
+<p> <%= @article.article_description %> </p>
+
+<div class="article-actions">
+  <%= link_to 'Go Back', articles_path %>
+  <%= link_to 'Edit', edit_article_path(@article) %>
+  <%= link_to 'Delete', article_path(@article), method: :delete, data: {confirm: "Are you sure?"} %>
+</div>
