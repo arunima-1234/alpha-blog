@@ -1,0 +1,7 @@
+  <% if logged_in? && article.user == current_user %>
+  <div class="article-actions">
+    <%= link_to 'Edit', edit_article_path(article)%>
+     <%= link_to("Delete", article, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }) %>
+    <%# <%= button_to "Delete", article_path(article), method: :delete %>
+  </div>
+<% end %>

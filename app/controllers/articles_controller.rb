@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  include SessionsHelper
 
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
@@ -7,6 +8,7 @@ class ArticlesController < ApplicationController
 
   def index
     @all_articles = Article.all
+    # @all_articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -15,6 +17,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(permit_article_params)
+    @article.user = current_user
     if @article.save
       flash[:notice] = "Article created successfully !"
       redirect_to articles_path

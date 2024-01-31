@@ -11,6 +11,20 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="ml-auto">
+        <%# <a href="/signup" class="navbar-text nav-item mr-3 text-white">Signup</a>
+        <a href="/login" class="navbar-text nav-item mr-3 text-white">Log in</a> %>
+
+        <% if logged_in? %>
+          <%= link_to current_user.username, user_path(current_user) %>
+          <%= link_to("Log out", logout_path, data: {turbo_method: :delete })%>
+        <% else %>
+          <%= link_to "Log in", login_path %>
+          <%= link_to "Sign up", signup_path %>
+        <% end %>
+      </div>
+    </nav>
     <%= render 'layouts/messages' %>
     <%= yield %>
   </body>

@@ -3,8 +3,12 @@ Showing articles details
 <p><strong> <%= @article.article_title %> </strong></p>
 <p> <%= @article.article_description %> </p>
 
+
+
 <div class="article-actions">
   <%= link_to 'Go Back', articles_path %>
-  <%= link_to 'Edit', edit_article_path(@article) %>
-  <%= link_to("Delete", @article, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }) %>
+  <% if logged_in? && @article.user == current_user %>
+    <%= link_to 'Edit', edit_article_path(@article) %>
+    <%= link_to("Delete", @article, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }) %>
+    <% end %>
 </div>
