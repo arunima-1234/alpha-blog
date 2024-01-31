@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :articles
+
 
   # get "up" => "rails/health#show", as: :rails_health_check
 
@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   get "about", to: "pages#about"
   get "signup", to: "users#new"
 
+  resources :articles
   resources :users, except: [:new]
 
   get "login", to:"sessions#new"
   post "login", to:"sessions#create"
   delete "logout", to:"sessions#destroy"
+
+  # mount API::Base => '/'
 end

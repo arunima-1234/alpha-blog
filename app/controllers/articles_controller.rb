@@ -16,9 +16,9 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(permit_article_params)
+    @article = Article.create!(permit_article_params)
     @article.user = current_user
-    if @article.save
+    if @article.persisted?
       flash[:notice] = "Article created successfully !"
       redirect_to articles_path
     else
