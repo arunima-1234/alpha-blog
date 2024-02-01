@@ -5,16 +5,18 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root "sessions#new"
-  get "about", to: "pages#about"
-  get "signup", to: "users#new"
+  # root "sessions#new"
+  # get "about", to: "pages#about"
+  # get "signup", to: "users#new"
 
-  resources :articles
-  resources :users, except: [:new]
+  # resources :articles
+  # resources :users, except: [:new]
 
-  get "login", to:"sessions#new"
-  post "login", to:"sessions#create"
-  delete "logout", to:"sessions#destroy"
+  # get "login", to:"sessions#new"
+  # post "login", to:"sessions#create"
+  # delete "logout", to:"sessions#destroy"
 
   # mount API::Base => '/'
+
+  mount Api::Base => '/'
 end

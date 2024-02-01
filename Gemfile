@@ -75,4 +75,6 @@ end
 
 gem "will_paginate", "~> 3.1.0"
 
-gem "grape", "~> 2.0"
+gem 'grape', '~> 2.0'
+gem 'grape-entity', '~> 0.7.1'
+gem 'byebug'
