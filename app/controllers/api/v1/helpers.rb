@@ -3,6 +3,7 @@ module Api
     module Helpers
       extend Grape::API::Helpers
       include SessionsHelper
+
       def permitted_params
         @permitted_params ||= declared(params, include_missing: false)
       end
@@ -13,10 +14,7 @@ module Api
       end
 
       def create_new_article(title, desc, user_id)
-        new_article = Article.create!(article_title: title, article_description: desc, user_id: user_id)
-        if new_article.persisted?
-          # call/trigger mail : TODO
-        end
+        @new_article = Article.create!(article_title: title, article_description: desc, user_id: user_id)
       end
 
       def delete_article(article_id)

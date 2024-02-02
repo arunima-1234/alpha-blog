@@ -27,6 +27,14 @@ module Api
         end
         post "/new" do
           new_article = create_new_article(permitted_params[:article_title], permitted_params[:article_description], permitted_params[:user_id])
+
+          if new_article[:status] == :created
+            present new_article, with: Api::V1::Entities::ArticleEntity
+            { message: new_article}
+          else
+            error!(new_article, 422)
+          end
+
         end
 
         desc "update existing article"
