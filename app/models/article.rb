@@ -7,9 +7,7 @@ class Article < ApplicationRecord
   after_create :send_notification_mail
 
   def send_notification_mail
-    NewArticleMailer.post_email.deliver_now
-    { status: :created, message: 'Article was successfully created. An email has been sent', article: @new_article }
+    SendNewArticleEmailJob.perform_async(id)
+    # .deliver_now(id)
   end
-
-
 end

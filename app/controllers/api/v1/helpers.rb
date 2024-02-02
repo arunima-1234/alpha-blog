@@ -15,6 +15,7 @@ module Api
 
       def create_new_article(title, desc, user_id)
         @new_article = Article.create!(article_title: title, article_description: desc, user_id: user_id)
+        @new_article
       end
 
       def delete_article(article_id)
