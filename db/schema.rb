@@ -10,13 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_30_092816) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_05_054110) do
   create_table "articles", force: :cascade do |t|
     t.string "article_title"
     t.text "article_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+  end
+
+  create_table "user_followers", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_user_followers_on_followed_id"
+    t.index ["follower_id"], name: "index_user_followers_on_follower_id"
+  end
+
+  create_table "user_followings", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_user_followings_on_followed_id"
+    t.index ["follower_id"], name: "index_user_followings_on_follower_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -27,4 +45,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_30_092816) do
     t.string "password_digest"
   end
 
+  add_foreign_key "user_followers", "users", column: "followed_id"
+  add_foreign_key "user_followers", "users", column: "follower_id"
+  add_foreign_key "user_followings", "users", column: "followed_id"
+  add_foreign_key "user_followings", "users", column: "follower_id"
 end
